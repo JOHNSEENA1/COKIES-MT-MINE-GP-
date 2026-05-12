@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐉 RISHU X HERE | DRAGON AUTO-MATION 🐉</title>
+
+<!-- Font Awesome for dragon icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(135deg, #0a0f0f 0%, #051a1a 50%, #010d0a 100%);
+    color: #c4ffc4;
+    font-family: 'Courier New', 'Fira Code', 'JetBrains Mono', monospace;
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated gradient background */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      repeating-linear-gradient(90deg, rgba(0,255,0,0.02) 0px, rgba(0,255,0,0.02) 2px, transparent 2px, transparent 8px),
+      repeating-linear-gradient(0deg, rgba(0,255,0,0.02) 0px, rgba(0,255,0,0.02) 2px, transparent 2px, transparent 8px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Floating dragon fire particles */
+  body::after {
+    content: "🐉";
+    position: fixed;
+    bottom: -50px;
+    right: -50px;
+    font-size: 300px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-15deg);
+  }
+
+  @keyframes subtlePulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Glassmorphism card */
+  .card {
+    background: rgba(5, 20, 10, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 255, 100, 0.35);
+    border-radius: 24px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 
+      0 8px 32px rgba(0, 255, 0, 0.1),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  }
+
+  .card:hover {
+    border-color: rgba(255, 100, 0, 0.7);
+    box-shadow: 0 12px 40px rgba(255, 80, 0, 0.25);
+    transform: translateY(-3px);
+  }
+
+  .card h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #ffaa66, #ff6600, #ff3300);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(255, 80, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 100, 0, 0.5);
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+
+  /* Dragon Header */
+  .dragon-header {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .dragon-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 15px #ff6600);
+    animation: dragonFly 3s ease-in-out infinite;
+  }
+  @keyframes dragonFly {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+  }
+  .server-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ffcc88, #ff8844, #ff4400);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(255,68,0,0.5);
+  }
+  .subtitle {
+    text-align: center;
+    color: #ffaa66;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-top: -5px;
+    margin-bottom: 15px;
+  }
+
+  /* Monitor panel - special glowing */
+  .monitor-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(255,100,0,0.3);
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+
+  .monitor-item:hover {
+    background: rgba(255,80,0,0.08);
+    border-radius: 12px;
+  }
+
+  .monitor-label {
+    color: #ffbb88;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .monitor-value {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(0, 20, 0, 0.6);
+    padding: 4px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,100,0,0.4);
+    backdrop-filter: blur(4px);
+    font-size: 1rem;
+  }
+
+  /* labels */
+  label {
+    display: block;
+    margin-top: 18px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #ffcc99;
+    letter-spacing: 1.5px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 6px;
+    background: rgba(0, 10, 5, 0.7);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 120, 0, 0.5);
+    color: #ffe0cc;
+    border-radius: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.25s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #ff8844;
+    box-shadow: 0 0 16px rgba(255, 100, 0, 0.5);
+    background: rgba(0, 20, 10, 0.85);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 24px;
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: monospace;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    background: linear-gradient(95deg, #4a2a0f, #3a1f0a);
+    color: #ffe0cc;
+    border: 1px solid #ff8844;
+    transition: all 0.25s;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    backdrop-filter: blur(5px);
+  }
+
+  button:hover {
+    background: linear-gradient(95deg, #6a3f1a, #4a2a10);
+    box-shadow: 0 0 20px #ff6622;
+    text-shadow: 0 0 5px #ffcc99;
+    transform: scale(1.01);
+  }
+
+  .green {
+    background: linear-gradient(95deg, #4a3a0f, #3a2a0a);
+    border-color: #ffaa44;
+  }
+  .red {
+    background: linear-gradient(95deg, #5a1a1a, #3a0e0e);
+    border-color: #ff6a6a;
+  }
+  .red:hover {
+    box-shadow: 0 0 18px #ff4f4f;
+  }
+
+  /* Terminal log with neon effect */
+  #log {
+    height: 240px;
+    background: rgba(0, 8, 4, 0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid #ff8844;
+    border-radius: 20px;
+    padding: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    color: #ffddbb;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 10px rgba(255,100,0,0.15);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1a0f05;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ff8844;
+    border-radius: 10px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Blink animation */
+  @keyframes softGlow {
+    0%, 100% { text-shadow: 0 0 3px #ff8844; }
+    50% { text-shadow: 0 0 12px #ffaa55; }
+  }
+  .monitor-value {
+    animation: softGlow 2s infinite;
+  }
+
+  /* Dragon scale decoration */
+  .dragon-scale {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 12px;
+    color: rgba(255,100,0,0.3);
+    z-index: 1;
+    font-family: monospace;
+  }
+
+  @media (max-width: 650px) {
+    body { padding: 12px; }
+    .card { padding: 15px; }
+    .server-name { font-size: 1.2rem; }
+    .monitor-label, .monitor-value { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- DRAGON HEADER SECTION -->
+  <div class="card" style="background: rgba(30,15,5,0.6);">
+    <div class="dragon-header">
+      <i class="fas fa-dragon dragon-icon"></i>
+      <div class="server-name">RISHU X HERE</div>
+      <div class="subtitle">⚡ DRAGON AUTO-MATION ENGINE v5.0 ⚡</div>
+      <div style="text-align: center; font-size: 0.7rem; color: #ffaa66; margin-top: 5px;">
+        <i class="fas fa-fire"></i> FIRE BREATH ACTIVE <i class="fas fa-fire"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONITOR PANEL -->
+  <div class="card">
+    <h2><i class="fas fa-chart-line"></i> DRAGON MONITOR <i class="fas fa-eye"></i></h2>
+    <div class="monitor-item">
+      <span class="monitor-label"><i class="fas fa-clock"></i> SYSTEM UPTIME</span>
+      <span class="monitor-value" id="uptimeValue">00:00:00</span>
+    </div>
+    <div class="monitor-item">
+      <span class="monitor-label"><i class="fas fa-cogs"></i> ACTIVE ENGINES</span>
+      <span class="monitor-value" id="activeTasks">0</span>
+    </div>
+    <div class="monitor-item">
+      <span class="monitor-label"><i class="fas fa-envelope"></i> PACKETS SENT</span>
+      <span class="monitor-value" id="sent">0</span>
+    </div>
+    <div class="monitor-item">
+      <span class="monitor-label"><i class="fas fa-sync-alt"></i> AUTO-ROTATION</span>
+      <span class="monitor-value" style="color:#ffaa66;">◆ DRAGON MODE ◆</span>
+    </div>
+  </div>
+
+  <!-- START TASK CARD -->
+  <div class="card">
+    <h2><i class="fas fa-play-circle"></i> INIT DRAGON STRIKE <i class="fas fa-fire"></i></h2>
+
+    <label><i class="fas fa-cookie-bite"></i> COOKIE INPUT MODE</label>
+    <select id="cookieMethod" onchange="toggleCookieInput()">
+      <option value="file">📁 UPLOAD .TXT</option>
+      <option value="paste">📋 PASTE RAW COOKIES</option>
+    </select>
+
+    <div id="fileInputArea">
+      <label><i class="fas fa-file-alt"></i> COOKIE FILE</label>
+      <input type="file" id="cookieFile" accept=".txt">
+    </div>
+
+    <div id="pasteInputArea" class="hidden">
+      <label><i class="fas fa-keyboard"></i> PASTE COOKIES</label>
+      <textarea id="cookieText" placeholder="c_user=...&#10;xs=..."></textarea>
+    </div>
+
+    <label><i class="fas fa-envelope-open-text"></i> MESSAGE FILE</label>
+    <input type="file" id="msg" accept=".txt">
+
+    <label><i class="fas fa-hashtag"></i> THREAD ID</label>
+    <input type="text" id="thread" placeholder="fb_group_or_convo_id">
+
+    <label><i class="fas fa-hourglass-half"></i> DELAY (SEC)</label>
+    <input type="number" id="delay" value="10">
+
+    <label><i class="fas fa-skull"></i> HATERS NAME</label>
+    <input type="text" id="haters" placeholder="display name">
+
+    <label><i class="fas fa-signature"></i> LAST NAME</label>
+    <input type="text" id="last" placeholder="surname">
+
+    <button id="startBtn" class="green"><i class="fas fa-dragon"></i> START DRAGON ATTACK <i class="fas fa-fire"></i></button>
+  </div>
+
+  <!-- CLOSE TASK BUTTON -->
+  <div class="card">
+    <h2><i class="fas fa-stop-circle"></i> FORCE TERMINATE</h2>
+    <button id="closeTaskBtn" class="red"><i class="fas fa-skull-crossbones"></i> CLOSE CURRENT TASK <i class="fas fa-ban"></i></button>
+  </div>
+
+  <!-- LOG CARD -->
+  <div class="card">
+    <h2><i class="fas fa-terminal"></i> DRAGON LOGS</h2>
+    <div id="log">[🐉] DRAGON SYSTEM READY\n[🐉] RISHU X HERE ACTIVE\n[🔥] WEBSOCKET CONNECTING...</div>
+  </div>
+</div>
+
+<div class="dragon-scale">
+  🐉 RISHU X HERE | DRAGON CORE v5.0 🐉
+</div>
+
+<script>
+  let ws;
+  let currentTaskId = null;
+  const logBox = document.getElementById("log");
+
+  function log(msg) {
+    logBox.innerHTML += `\n[${new Date().toLocaleTimeString()}] ${msg}`;
+    logBox.scrollTop = logBox.scrollHeight;
+  }
+
+  function toggleCookieInput() {
+    const m = document.getElementById("cookieMethod").value;
+    document.getElementById("fileInputArea").classList.toggle("hidden", m !== "file");
+    document.getElementById("pasteInputArea").classList.toggle("hidden", m !== "paste");
+  }
+
+  function connect() {
+    ws = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/ws");
+
+    ws.onopen = () => log("🐉 DRAGON CHANNEL ACTIVE | RISHU X HERE");
+    ws.onclose = () => {
+      log("⚠️ DRAGON LINK DROPPED | REINITIALIZING...");
+      setTimeout(connect, 3000);
+    };
+
+    ws.onmessage = (e) => {
+      let d;
+      try { d = JSON.parse(e.data); } catch { return; }
+
+      if (d.type === "log") log(d.message);
+      if (d.type === "task_started") {
+        currentTaskId = d.taskId;
+        log(`🐉🔥 DRAGON STRIKE ACTIVE | TASK ID: ${currentTaskId}`);
+      }
+      if (d.type === "stopped") {
+        log(`⛔ DRAGON TASK TERMINATED | ID: ${d.taskId}`);
+        if (currentTaskId === d.taskId) currentTaskId = null;
+      }
+      if (d.type === "monitor_data") {
+        const totalSeconds = d.uptime;
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        document.getElementById("uptimeValue").textContent = `${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+        document.getElementById("activeTasks").textContent = d.activeTasks;
+        document.getElementById("sent").textContent = d.totalSent;
+        if (d.activeTasks === 0) currentTaskId = null;
+      }
+    };
+  }
+
+  setInterval(() => {
+    if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: "ping" }));
+  }, 25000);
+
+  setInterval(() => {
+    if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: "monitor" }));
+  }, 2000);
+
+  // START task
+  document.getElementById("startBtn").onclick = () => {
+    const msgFile = document.getElementById("msg").files[0];
+    if (!msgFile) return alert("🐉 SELECT MESSAGE FILE FIRST");
+
+    const method = document.getElementById("cookieMethod").value;
+    const sendTask = (cookies) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        ws.send(JSON.stringify({
+          type: "start",
+          cookieContent: cookies,
+          messageContent: e.target.result,
+          threadID: document.getElementById("thread").value,
+          delay: document.getElementById("delay").value,
+          hatersName: document.getElementById("haters").value,
+          lastHereName: document.getElementById("last").value
+        }));
+        log("🐉 DEPLOYING DRAGON STRIKE...");
+      };
+      reader.readAsText(msgFile);
+    };
+
+    if (method === "file") {
+      const f = document.getElementById("cookieFile").files[0];
+      if (!f) return alert("📁 UPLOAD COOKIE FILE");
+      const r = new FileReader();
+      r.onload = e => sendTask(e.target.result);
+      r.readAsText(f);
+    } else {
+      const pText = document.getElementById("cookieText").value;
+      if (!pText.trim()) return alert("📋 PASTE COOKIES");
+      sendTask(pText);
+    }
+  };
+
+  // CLOSE task
+  document.getElementById("closeTaskBtn").onclick = () => {
+    if (!currentTaskId) return alert("🐉 NO ACTIVE DRAGON TASK");
+    if (ws && ws.readyState === 1) {
+      ws.send(JSON.stringify({ type: "stop_by_id", taskId: currentTaskId }));
+      log(`🛑 KILL SIGNAL → DRAGON TASK ${currentTaskId}`);
+    }
+  };
+
+  connect();
+  toggleCookieInput();
+</script>
+</body>
+</html>
